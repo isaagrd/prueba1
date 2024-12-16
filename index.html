@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LFA Reader</title>
+    <style type="text/css">
+        body {
+            background-color: #F5F5F5;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .data-container {
+            display: flex;
+            justify-content: space-between;
+            width: 50%;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #FFF;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .data-item {
+            text-align: center;
+        }
+        .data-item h2 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .data-item p {
+            font-size: 48px;
+            font-weight: bold;
+            color: #6eb7ff;
+        }
+        .data-head {
+            margin: auto;
+            width: 50%;
+            text-align: center;
+            font-size: 45px;
+            font-weight: bold;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #FFF;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="data-head">LFA Reader</div>
+    <div class="data-container">
+        <div class="data-item">
+            <h2>Red</h2>
+            <p class="value" id="Red">0</p>
+        </div>
+        <div class="data-item">
+            <h2>Blue</h2>
+            <p class="value" id="Blue">0</p>
+        </div>
+    </div>
+
+    <!-- Firebase Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+
+    <script>
+        // Configuración de Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyDz6sTDUnckTS7zuPMXQCyQ3SwqPFwjNi0",
+            authDomain: "lfar-d74f6.firebaseapp.com",
+            databaseURL: "https://lfar-d74f6-default-rtdb.firebaseio.com",
+            projectId: "lfar-d74f6",
+            storageBucket: "lfar-d74f6.appspot.com",
+            messagingSenderId: "139473197221",
+            appId: "1:139473197221:web:d76c8a098fd12d32c5954c"
+        };
+
+        // Inicializar Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        // Referencias a los datos en la base de datos
+        const dataRefRed = database.ref("LFAR/Rojo");
+        const dataRefBlue = database.ref("LFAR/Azul");
+
+        // Actualizar el valor de "Red"
+        dataRefRed.on('value', function(snapshot) {
+            const redValue = snapshot.val();
+            document.getElementById('Red').innerHTML = redValue;
+        });
+
+        // Actualizar el valor de "Blue"
+        dataRefBlue.on('value', function(snapshot) {
+            const blueValue = snapshot.val();
+            document.getElementById('Blue').innerHTML = blueValue;
+        });
+    </script>
+</body>
+</html>
