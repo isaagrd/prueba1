@@ -90,6 +90,18 @@
             <h2>Blue</h2>
             <p class="value" id="Blue">0</p>
         </div>
+        <div class="data-item">
+            <h2>Green</h2>
+            <p class="value" id="Green">0</p>
+        </div>
+        <div class="data-item">
+            <h2>Detected Color</h2>
+            <p class="value" id="Color_detected">Indefinido</p>
+        </div>
+        <div class="data-item">
+            <h2>Lux</h2>
+            <p class="value" id="Lux">0</p>
+        </div>
     </div>
 
     <!-- Firebase Scripts -->
@@ -112,21 +124,21 @@
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
 
-        // Referencias a los datos en la base de datos
-        const dataRefRed = database.ref("LFAR/Rojo");
-        const dataRefBlue = database.ref("LFAR/Azul");
+        // Función para actualizar un valor en el DOM
+        function updateValue(refName, elementId) {
+            const dataRef = database.ref(`LFAR/${refName}`);
+            dataRef.on('value', function(snapshot) {
+                const value = snapshot.val();
+                document.getElementById(elementId).innerHTML = value;
+            });
+        }
 
-        // Actualizar el valor de "Red"
-        dataRefRed.on('value', function(snapshot) {
-            const redValue = snapshot.val();
-            document.getElementById('Red').innerHTML = redValue;
-        });
-
-        // Actualizar el valor de "Blue"
-        dataRefBlue.on('value', function(snapshot) {
-            const blueValue = snapshot.val();
-            document.getElementById('Blue').innerHTML = blueValue;
-        });
+        // Actualizar valores dinámicamente
+        updateValue("Rojo", "Red");
+        updateValue("Azul", "Blue");
+        updateValue("Verde", "Green");
+        updateValue("Color_detectado", "Color_detected");
+        updateValue("Lux", "Lux");
     </script>
 </body>
 </html>
