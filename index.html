@@ -84,61 +84,28 @@
     <div class="data-container">
         <div class="data-item">
             <h2>Red</h2>
-            <p class="value" id="Red">0</p>
+            <p class="value" id="Red">10122</p>
         </div>
         <div class="data-item">
             <h2>Blue</h2>
-            <p class="value" id="Blue">0</p>
+            <p class="value" id="Blue">12117</p>
         </div>
         <div class="data-item">
             <h2>Green</h2>
-            <p class="value" id="Green">0</p>
+            <p class="value" id="Green">17276</p>
         </div>
         <div class="data-item">
             <h2>Detected Color</h2>
-            <p class="value" id="Color_detected">Indefinido</p>
+            <p class="value" id="Color_detected">Green</p>
         </div>
         <div class="data-item">
             <h2>Lux</h2>
-            <p class="value" id="Lux">0</p>
+            <p class="value" id="Lux">15118</p>
+        </div>
+        <div class="data-item">
+            <h2>Intensity</h2>
+            <p class="value" id="Intensity">2</p>
         </div>
     </div>
-
-    <!-- Firebase Scripts -->
-    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
-
-    <script>
-        // Configuración de Firebase
-        const firebaseConfig = {
-            apiKey: "AIzaSyDz6sTDUnckTS7zuPMXQCyQ3SwqPFwjNi0",
-            authDomain: "lfar-d74f6.firebaseapp.com",
-            databaseURL: "https://lfar-d74f6-default-rtdb.firebaseio.com",
-            projectId: "lfar-d74f6",
-            storageBucket: "lfar-d74f6.appspot.com",
-            messagingSenderId: "139473197221",
-            appId: "1:139473197221:web:d76c8a098fd12d32c5954c"
-        };
-
-        // Inicializar Firebase
-        firebase.initializeApp(firebaseConfig);
-        const database = firebase.database();
-
-        // Función para actualizar un valor en el DOM
-        function updateValue(refName, elementId) {
-            const dataRef = database.ref(`LFAR/${refName}`);
-            dataRef.on('value', function(snapshot) {
-                const value = snapshot.val();
-                document.getElementById(elementId).innerHTML = value;
-            });
-        }
-
-        // Actualizar valores dinámicamente
-        updateValue("Rojo", "Red");
-        updateValue("Azul", "Blue");
-        updateValue("Verde", "Green");
-        updateValue("Color_detectado", "Color_detected");
-        updateValue("Lux", "Lux");
-    </script>
 </body>
 </html>
